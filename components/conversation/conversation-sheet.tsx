@@ -111,13 +111,14 @@ export const ConversationSheet = () => {
   const updateConversation = (newMessage: ChatMessage) => {
     setConversationData((prevData) => [...prevData, newMessage]);
   };
-  //   const updateReplyConversation = (newMessage: ChatMessage) => {
-  //     setReplyConversationData((prevData) => [...prevData, newMessage]);
-  //   };
-
-  //   console.log(`conversationData`, conversationData)
 
   const handleEndChat = async () => {
+    // sessionStorage.setItem("retrieval_assistant_id","asst_rm7nG0230AIW6rTJWDNBF0hB"); 
+    console.log("retrieval_assistant_id: " + sessionStorage.getItem("retrieval_assistant_id"));
+    const axios = require("axios");
+    const res = await axios.get('http://ec2-13-127-111-137.ap-south-1.compute.amazonaws.com/api/bg-lead-qualifier', { params: { retrieval_assistant_id: sessionStorage.getItem("retrieval_assistant_id") } });
+    res.data.status; // { answer: 42 }
+    console.log("end chat: " + res.data.status);
     setIsLoading(true);
     setConversationData([]);
     sessionStorage.setItem("info_assistant_id", "");
@@ -125,6 +126,7 @@ export const ConversationSheet = () => {
     sessionStorage.setItem("retrieval_assistant_id", "");
     sessionStorage.setItem("retrieval_thread_id", "");
     setIsLoading(false);
+    console.log("retrieval_assistant_id: " + sessionStorage.getItem("retrieval_assistant_id"));
   };
 
   return (
