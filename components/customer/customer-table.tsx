@@ -16,7 +16,34 @@ import {
     TableRow,
   } from "@/components/ui/table"
 
-import customerData from "@/data/customer.json";
+  const handleRowData = async (id:string) => {
+
+  }
+
+  const fetchCustomerData = async () => {
+    const axios = require('axios');
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'http://ec2-13-127-111-137.ap-south-1.compute.amazonaws.com/api/get-basic-user-data',
+      headers: { }
+    };
+
+    axios.request(config)
+    .then((response: { data: any }) => {
+      console.log(response.data);
+    })
+    .catch((error: any) => {
+      console.log(error);
+    });
+
+  }
+  fetchCustomerData();
+  // const customerData = fetchCustomerData();
+
+const customerData = [{"user_name":"Rakesh Sinha", "user_phone":"1234"}]
+// import customerData from "@/data/customer.json";
+
 
 export const CustomerTable = () => {
   return (
@@ -49,17 +76,17 @@ export const CustomerTable = () => {
   <TableHeader>
     <TableRow>
       <TableHead className=" font-bold text-indigo-500 text-base ">Name</TableHead>
-      <TableHead className=" font-bold text-indigo-500 text-base ">Date Contacted</TableHead>
-      <TableHead className=" font-bold text-indigo-500 text-base ">Reason</TableHead>
+      <TableHead className=" font-bold text-indigo-500 text-base ">Contact Number</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     {
         customerData?.map((item, index) => (
             <TableRow className="h-[10px]" key={index}>
-                <TableCell className="font-xs ">{item.name}</TableCell>
-                <TableCell className="font-xs ">{item.date}</TableCell>
-                <TableCell className="font-xs ">{item.reason}</TableCell>
+              <a onClick={handleRowData(item.retrieval_assistant_id)}>
+              <TableCell className="font-xs ">{item.user_name}</TableCell>
+              <TableCell className="font-xs ">{item.user_phone}</TableCell>
+              </a>
             </TableRow>
         ))
     }

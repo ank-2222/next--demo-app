@@ -12,7 +12,7 @@ export const ConversationItem = ({
   message,
 }: conversationItemProps) => {
   return (
-    <div className="w-full  " >
+    <div className="w-full" >
       {user && (
         <p className=" ml-[10px] pt-[10px] text-zinc-600 font-black tracking-tight text-md capitalize flex items-center justify-start w-full">
           <User size={30} /> {" "}<span className="w-fit max-w-[80%] bg-gray-300  px-4 py-2 font-bold  ml-[10px]  lowercase rounded-[8px] "> {" "}{message}</span>
